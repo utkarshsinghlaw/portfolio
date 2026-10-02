@@ -57,7 +57,7 @@ export default function Home() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           
           {/* LEFT COLUMN: Sticky Bio & Hero (The "3-Second" Activation) */}
-          <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-24 lg:h-[calc(100vh-120px)] flex flex-col">
+          <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-24 lg:h-[calc(100vh-120px)] overflow-y-auto pb-8 flex flex-col no-scrollbar">
             <header>
               <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-teal-300 uppercase bg-teal-900/30 border border-teal-800/50 rounded-full">
                 {bioContent.eyebrow}

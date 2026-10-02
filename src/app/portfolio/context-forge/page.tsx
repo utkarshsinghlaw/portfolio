@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowLeft, Terminal, Shield, Cpu, Github, ExternalLink } from "lucide-react";
+import { ArrowLeft, Terminal, Shield, Cpu, ExternalLink } from "lucide-react";
 
 export default function ContextForgeProject() {
   return (
@@ -13,8 +13,8 @@ export default function ContextForgeProject() {
             Back to Portfolio
           </Link>
           <div className="flex space-x-4">
-            <a href="https://github.com/utkarshsinghlaw/context-forge-68" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-white transition-colors">
-              <Github className="w-5 h-5" />
+            <a href="https://github.com/utkarshsinghlaw/context-forge-68" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-white transition-colors flex items-center gap-2 text-sm font-medium">
+              View Source <ExternalLink className="w-4 h-4" />
             </a>
           </div>
         </div>

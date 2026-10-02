@@ -82,6 +82,39 @@ def generate_injection_payload(target_agent):
     assert not response.leaked_state, "VULNERABILITY DETECTED"`,
     color: "from-rose-500 to-orange-500",
     link: "https://github.com/utkarshsinghlaw/ai-security-redteam-plugin"
+  },
+  {
+    title: "data-analysis-skills",
+    description: "AI agent skills for Data Analysis, Visualization, and Statistical Validation.",
+    skills: ["stats-validator", "visualization-assistant", "data-scout"],
+    tags: ["Data Analysis", "Statistics", "Visualization"],
+    snippet: `# Statistical Validation Routine
+def run_statistical_validation(dataset, confidence_level=0.95):
+    variance = calculate_variance(dataset)
+    p_value = compute_p_value(dataset, baseline_model)
+    
+    if p_value < (1 - confidence_level):
+        return "Statistically Significant"
+    return "Null Hypothesis Maintained"`,
+    color: "from-blue-500 to-indigo-500",
+    link: "https://github.com/utkarshsinghlaw/data-analysis-skills"
+  },
+  {
+    title: "legal-workflow-plugin",
+    description: "A Python-based plugin for AI agents to securely interface with Legal CRMs like Clio and LEAP.",
+    skills: ["crm-integration", "secure-api-auth", "matter-management"],
+    tags: ["Python", "Legal Tech", "API Integration"],
+    snippet: `# Secure CRM Authentication
+class LegalCRMClient:
+    def __init__(self, api_key: str, region="US"):
+        self.session = SecureSession(api_key, ssl_verify=True)
+        self.base_url = resolve_crm_region(region)
+
+    @audit_logged
+    def get_matter_details(self, matter_id: str):
+        return self.session.get(f"{self.base_url}/matters/{matter_id}")`,
+    color: "from-slate-500 to-gray-500",
+    link: "https://github.com/utkarshsinghlaw/legal-workflow-plugin"
   }
 ];
 

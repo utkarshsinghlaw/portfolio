@@ -161,7 +161,7 @@ export default function AIEngineering() {
                 </div>
 
                 {/* Right: Code Block (Performative UI) */}
-                <div className={\`rounded-xl p-[1px] bg-gradient-to-br \${project.color} shadow-2xl\`}>
+                <div className={`rounded-xl p-[1px] bg-gradient-to-br ${project.color} shadow-2xl`}>
                   <div className="bg-[#0f111a] rounded-xl overflow-hidden h-full">
                     <div className="flex items-center px-4 py-3 bg-[#1a1d27] border-b border-white/5 space-x-2">
                       <div className="w-3 h-3 rounded-full bg-rose-500/80" />

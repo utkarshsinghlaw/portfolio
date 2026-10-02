@@ -150,14 +150,21 @@ export default function Home() {
                     Whether you need to discuss product management, legal operations, or architecting AI agents—drop me a line.
                   </p>
                   
-                  <form className="space-y-4">
+                  <form action="https://formsubmit.co/utkarshsinghlaw@gmail.com" method="POST" className="space-y-4">
+                    {/* FormSubmit Configuration */}
+                    <input type="hidden" name="_subject" value="New Contact Form Submission - Portfolio" />
+                    <input type="hidden" name="_template" value="table" />
+                    <input type="hidden" name="_captcha" value="false" />
+                    
                     <input 
                       type="email" 
+                      name="email"
                       placeholder="hello@company.com" 
                       className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-indigo-200 focus:outline-none focus:bg-white/20 transition-all backdrop-blur-sm"
                       required
                     />
                     <textarea 
+                      name="message"
                       placeholder="How can I help?" 
                       rows={3}
                       className="w-full px-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder:text-indigo-200 focus:outline-none focus:bg-white/20 transition-all resize-none backdrop-blur-sm"
@@ -165,7 +172,7 @@ export default function Home() {
                     />
                     <button 
                       type="submit" 
-                      className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white text-indigo-600 font-semibold hover:bg-indigo-50 transition-colors w-full sm:w-auto"
+                      className="inline-flex items-center justify-center px-6 py-3 rounded-xl bg-white text-indigo-600 font-semibold hover:bg-indigo-50 transition-colors w-full sm:w-auto hover:scale-105"
                     >
                       Send Message
                       <ArrowRight className="w-4 h-4 ml-2" />

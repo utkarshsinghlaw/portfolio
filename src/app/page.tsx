@@ -44,20 +44,12 @@ const secondaryPillars = [
 export default function Home() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-[#0B1120] text-[#051c2c] dark:text-slate-200 font-sans selection:bg-teal-500/30">
-      
-      {/* Top Navbar */}
-      <nav className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex justify-between items-center">
-        <div className="font-bold text-lg text-[#051c2c] dark:text-white tracking-tighter">Utkarsh Singh</div>
-        <a href="/cv.pdf" className="px-5 py-2 text-sm font-medium border border-blue-500/30 text-blue-400 rounded-full hover:bg-blue-500/10 transition-colors">
-          Download CV
-        </a>
-      </nav>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-16">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8">
           
           {/* LEFT COLUMN: Sticky Bio & Hero (The "3-Second" Activation) */}
-          <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-24 lg:h-[calc(100vh-120px)] overflow-y-auto pb-8 flex flex-col no-scrollbar">
+          <div id="about" className="lg:col-span-4 space-y-8 lg:sticky lg:top-24 lg:h-[calc(100vh-120px)] overflow-y-auto pb-8 flex flex-col no-scrollbar">
             <header>
               <div className="inline-block px-3 py-1 mb-4 text-xs font-semibold tracking-wider text-teal-300 uppercase bg-teal-900/30 border border-teal-800/50 rounded-full">
                 {bioContent.eyebrow}
@@ -76,24 +68,35 @@ export default function Home() {
               ))}
             </section>
 
-            <div className="flex items-center space-x-4 pt-4 mt-auto">
-              <a href="https://linkedin.com/in/utkarsh-singh-630a88311" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-[#334155] text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:shadow-md transition-all">
-                <FaLinkedin className="h-5 w-5" />
-                <span className="sr-only">LinkedIn</span>
-              </a>
-              <a href="https://github.com/utkarshsinghlaw" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-[#334155] text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:shadow-md transition-all">
-                <FaGithub className="h-5 w-5" />
-                <span className="sr-only">GitHub</span>
-              </a>
-              <a href="mailto:utkarshsinghlaw@gmail.com" className="p-2 rounded-full bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-[#334155] text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 hover:shadow-md transition-all">
-                <Mail className="h-5 w-5" />
-                <span className="sr-only">Email</span>
-              </a>
+            <div className="pt-4 mt-auto space-y-6">
+              <div className="flex flex-col space-y-3">
+                <a href="#contact" className="inline-flex items-center justify-center w-full sm:w-auto px-6 py-3 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-semibold transition-all shadow-lg hover:shadow-blue-500/25">
+                  Let's Talk
+                  <ArrowRight className="ml-2 w-4 h-4" />
+                </a>
+                <p className="text-xs text-slate-500 font-medium flex items-center">
+                  <span className="w-2 h-2 rounded-full bg-teal-500 mr-2 animate-pulse" />
+                  Managed £XM in commercial portfolios & resolved complex regulatory disputes.
+                </p>
+              </div>
+
+              <div className="flex items-center space-x-4 pt-4 border-t border-slate-200 dark:border-slate-800">
+                <a href="/cv.pdf" className="text-sm font-medium text-blue-500 hover:text-blue-400">Download CV</a>
+                <span className="text-slate-300 dark:text-slate-700">|</span>
+                <a href="https://linkedin.com/in/utkarsh-singh-630a88311" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-[#334155] text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all">
+                  <FaLinkedin className="h-4 w-4" />
+                  <span className="sr-only">LinkedIn</span>
+                </a>
+                <a href="https://github.com/utkarshsinghlaw" target="_blank" rel="noopener noreferrer" className="p-2 rounded-full bg-white dark:bg-[#1E293B] border border-slate-200 dark:border-[#334155] text-slate-600 dark:text-slate-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-all">
+                  <FaGithub className="h-4 w-4" />
+                  <span className="sr-only">GitHub</span>
+                </a>
+              </div>
             </div>
           </div>
 
           {/* RIGHT COLUMN: The Scrolling Projects (Von Restorff + Constrained Content) */}
-          <div className="lg:col-span-8 space-y-12">
+          <div id="pillars" className="lg:col-span-8 space-y-12">
             
             {/* The "Hero Project" Block (Context Forge) */}
             <section>
@@ -137,7 +140,7 @@ export default function Home() {
             </section>
 
             {/* The "Peak-End" Contact Card */}
-            <section className="pt-12">
+            <section id="contact" className="pt-12 scroll-mt-24">
               <div className="bg-indigo-600 dark:bg-indigo-900/50 rounded-3xl p-8 md:p-12 border border-indigo-500 dark:border-indigo-800 shadow-2xl relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 blur-3xl rounded-full transform translate-x-1/2 -translate-y-1/2 pointer-events-none" />
                 

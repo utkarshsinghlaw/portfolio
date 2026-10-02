@@ -2,14 +2,15 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, Cpu, ShieldCheck, ExternalLink } from "lucide-react";
+import { ArrowLeft, ExternalLink, Box } from "lucide-react";
 import { FaGithub } from "react-icons/fa";
 
 const projects = [
   {
     title: "ai-agent-toolkit",
-    description: "Custom AI agent skills for business analytics, software dev, and consulting. Includes tools for dataset sourcing, dashboard design, statistical validation, ML concept translation, and skill engineering (open-skills-architect).",
-    tags: ["Agent Skills", "LLM Routing", "Prompt Engineering"],
+    description: "Core toolkit for architecting autonomous AI agents. Features skill engineering, ML concept translation, and rigorous validation logic.",
+    skills: ["open-skills-architect", "stakeholder-ml-translator", "financial-analysis-consulting", "gtm-strategy-consulting", "market-analysis-consulting"],
+    tags: ["Agent Architecture", "Prompt Engineering", "Validation"],
     snippet: `// System Prompt Excerpt: open-skills-architect
 export function validateSkill(schema: SkillSchema) {
   if (!hasNegativeConstraints(schema)) {
@@ -21,9 +22,25 @@ export function validateSkill(schema: SkillSchema) {
     link: "https://github.com/utkarshsinghlaw/ai-agent-toolkit"
   },
   {
-    title: "saas-market-research-plugin",
-    description: "A Python plugin that queries GitHub, ProductHunt, and StackOverflow APIs for data-driven SaaS validation, allowing autonomous agents to research software demand.",
-    tags: ["Python", "MCP", "API Integration", "Data Analysis"],
+    title: "data-analysis-skills",
+    description: "A specialized suite of agent skills for sourcing real-world data, building visualizations, and enforcing statistical rigor on business models.",
+    skills: ["data-scout", "stats-validator", "visualization-assistant"],
+    tags: ["Data Analysis", "Statistical Modeling", "WebFetch"],
+    snippet: `// Statistical Verification Gate: stats-validator
+if (p_value > 0.05 && claimed_significance === true) {
+  triggerAudit({
+    reason: "Claimed significance fails standard threshold.",
+    severity: "HIGH"
+  });
+}`,
+    color: "from-indigo-500 to-purple-500",
+    link: "https://github.com/utkarshsinghlaw/data-analysis-skills"
+  },
+  {
+    title: "saas-and-ecommerce-skills",
+    description: "A comprehensive suite of 13 AI agent skills for validating, launching, and scaling software and digital products.",
+    skills: ["saas-market-research", "saas-unit-economics", "webapp-landing-activation", "product-led-growth", "organic-growth-marketing", "budget-constrained-planning"],
+    tags: ["SaaS Metrics", "CRO", "Growth Marketing"],
     snippet: `# Plugin Execution: Market Validation
 def query_market_signals(repo_name: str):
     github_stars = fetch_gh_metrics(repo_name)
@@ -33,11 +50,28 @@ def query_market_signals(repo_name: str):
         return "Strong Market Validation"
     return "Insufficient Signals"`,
     color: "from-purple-500 to-pink-500",
-    link: "https://github.com/utkarshsinghlaw/saas-market-research-plugin"
+    link: "https://github.com/utkarshsinghlaw/saas-and-ecommerce-skills"
+  },
+  {
+    title: "legal-and-compliance-skills",
+    description: "AI agent skills designed for Governance, Risk, and Compliance, automating cross-jurisdictional audits and attorney oversight.",
+    skills: ["legal-workflow-automation", "compliance-readiness", "uk-compliance-readiness", "uk-ecommerce-compliance"],
+    tags: ["Legal Tech", "Compliance", "Risk Assessment"],
+    snippet: `# Secure Legal CRM Interface
+@secure_endpoint(requires_auth=True)
+def sync_matter_documents(matter_id: str, crm_client):
+    docs = crm_client.get_documents(matter_id)
+    summaries = []
+    for doc in docs:
+        summaries.append(agent.summarize_legal_doc(doc))
+    return summaries`,
+    color: "from-emerald-500 to-teal-500",
+    link: "https://github.com/utkarshsinghlaw/legal-and-compliance-skills"
   },
   {
     title: "ai-security-redteam-plugin",
     description: "An active red-teaming payload generator designed to test automated AI workflows against prompt injections and jailbreak attempts.",
+    skills: ["ai-security-guardrails", "automated-pentesting"],
     tags: ["Python", "AI Security", "Red Teaming", "Defensive AI"],
     snippet: `# Security Injection Payload Generation
 def generate_injection_payload(target_agent):
@@ -48,23 +82,6 @@ def generate_injection_payload(target_agent):
     assert not response.leaked_state, "VULNERABILITY DETECTED"`,
     color: "from-rose-500 to-orange-500",
     link: "https://github.com/utkarshsinghlaw/ai-security-redteam-plugin"
-  },
-  {
-    title: "legal-workflow-plugin",
-    description: "A Python-based plugin for AI agents to securely interface with Legal CRMs like Clio and LEAP, bridging the gap between LLMs and legal operations.",
-    tags: ["Python", "Legal Tech", "CRM Integration", "Automation"],
-    snippet: `# Secure Legal CRM Interface
-@secure_endpoint(requires_auth=True)
-def sync_matter_documents(matter_id: str, crm_client):
-    docs = crm_client.get_documents(matter_id)
-    summaries = []
-    
-    for doc in docs:
-        summaries.append(agent.summarize_legal_doc(doc))
-        
-    return summaries`,
-    color: "from-emerald-500 to-teal-500",
-    link: "https://github.com/utkarshsinghlaw/legal-workflow-plugin"
   }
 ];
 
@@ -111,13 +128,31 @@ export default function AIEngineering() {
                   <p className="text-slate-400 leading-relaxed text-lg">
                     {project.description}
                   </p>
-                  <div className="flex flex-wrap gap-2">
+                  
+                  {/* Skills List */}
+                  <div className="space-y-3 pt-2">
+                    <h4 className="text-sm font-semibold text-slate-300 uppercase tracking-wider flex items-center">
+                      <Box className="w-4 h-4 mr-2 text-cyan-500" />
+                      Included Skills
+                    </h4>
+                    <div className="flex flex-wrap gap-2">
+                      {project.skills.map(skill => (
+                        <span key={skill} className="px-3 py-1 text-xs font-mono rounded-lg bg-cyan-950/40 text-cyan-300 border border-cyan-900/50">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Architecture Tags */}
+                  <div className="flex flex-wrap gap-2 pt-2">
                     {project.tags.map(tag => (
-                      <span key={tag} className="px-3 py-1 text-sm font-mono rounded-lg bg-slate-800 text-slate-300 border border-slate-700">
+                      <span key={tag} className="px-3 py-1 text-xs font-mono rounded-lg bg-slate-800 text-slate-400 border border-slate-700">
                         {tag}
                       </span>
                     ))}
                   </div>
+
                   <a href={project.link} target="_blank" rel="noreferrer" className="inline-flex items-center space-x-2 text-sm font-medium text-white bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg transition-colors mt-4">
                     <FaGithub className="w-4 h-4" />
                     <span>View Repository</span>
@@ -136,7 +171,6 @@ export default function AIEngineering() {
                     </div>
                     <div className="p-6 overflow-x-auto">
                       <pre className="font-mono text-sm leading-loose">
-                        {/* Simulate token reveal with Framer Motion text staggering */}
                         <motion.code
                           initial="hidden"
                           whileInView="visible"

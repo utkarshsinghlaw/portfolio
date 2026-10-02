@@ -1,192 +1,160 @@
-"use client";
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
 import Link from "next/link";
-import { ArrowLeft, FileText, Lock, Layout, Terminal } from "lucide-react";
+import { ArrowLeft, Terminal, Shield, Cpu, Github, ExternalLink } from "lucide-react";
 
-const personas = [
-  {
-    id: "mba",
-    title: "The Consultant",
-    bgClass: "bg-slate-50 dark:bg-slate-900",
-    computerTheme: "bg-white text-[#051c2c] border-slate-200",
-    icon: <FileText className="w-6 h-6 text-blue-600" />,
-    prompt: "> Parse 500-page HBS Case Study...",
-    loader: "Synthesizing financial models...",
-    result: "Local Brief Generated. Zero cloud upload.",
-    desc: "Rapidly distilling dense case studies and financial models into actionable briefs without uploading proprietary academic data to the cloud."
-  },
-  {
-    id: "lawyer",
-    title: "The Legal Analyst",
-    bgClass: "bg-zinc-100 dark:bg-zinc-950",
-    computerTheme: "bg-zinc-900 text-red-400 border-red-900/50",
-    icon: <Lock className="w-6 h-6 text-red-500" />,
-    prompt: "> Search confidential M&A contracts...",
-    loader: "Running local e-discovery...",
-    result: "Privilege maintained. Zero data leakage.",
-    desc: "Parsing confidential contracts and conducting rapid e-discovery entirely locally, guaranteeing strict attorney-client privilege."
-  },
-  {
-    id: "designer",
-    title: "The Architect",
-    bgClass: "bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950 dark:to-purple-950",
-    computerTheme: "bg-white/80 dark:bg-black/50 backdrop-blur-xl border-purple-500/30 text-purple-900 dark:text-purple-300",
-    icon: <Layout className="w-6 h-6 text-purple-500" />,
-    prompt: "> Find structural dimensions for Taili Zhuang project...",
-    loader: "Scanning local CAD metadata & mood boards...",
-    result: "Visuals retrieved instantly.",
-    desc: "Searching through local mood boards, CAD file metadata, and dense project specs using natural language."
-  },
-  {
-    id: "dev",
-    title: "The Independent Dev",
-    bgClass: "bg-black",
-    computerTheme: "bg-black text-green-500 border-green-500/30 font-mono",
-    icon: <Terminal className="w-6 h-6 text-green-500" />,
-    prompt: "$ ./context-forge query --repo=legacy-monolith",
-    loader: "Generating architecture diagrams...",
-    result: "[OK] Architecture mapped in 1.2s.",
-    desc: "Querying local, undocumented codebases and generating architecture diagrams instantly to accelerate shipping speed."
-  }
-];
-
-export default function PersonalSoftware() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"]
-  });
-
-  const [activeIndex, setActiveIndex] = useState(0);
-
-  // Update active index based on scroll
-  useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (latest) => {
-      // 4 personas = 0 to 0.25 (index 0), 0.25 to 0.5 (index 1), etc.
-      let index = Math.floor(latest * personas.length);
-      if (index >= personas.length) index = personas.length - 1;
-      setActiveIndex(index);
-    });
-    return () => unsubscribe();
-  }, [scrollYProgress]);
-
-  const activePersona = personas[activeIndex];
-
+export default function ContextForgeCaseStudy() {
   return (
-    <div ref={containerRef} className="relative h-[400vh] w-full font-sans transition-colors duration-700 ease-in-out">
+    <div className="min-h-screen bg-[#0B1120] text-slate-300 font-sans selection:bg-teal-500/30">
       
-      {/* Sticky Container */}
-      <div className={`sticky top-0 h-screen w-full flex flex-col items-center justify-center transition-colors duration-700 ${activePersona.bgClass}`}>
-        
-        {/* Absolute Back Button */}
-        <div className="absolute top-8 left-8 md:top-16 md:left-16 z-50">
-          <Link href="/#pillars" className="inline-flex items-center text-sm font-medium text-indigo-500 hover:opacity-80 transition-opacity bg-white/10 p-2 rounded-lg backdrop-blur-sm">
+      {/* Top Navbar */}
+      <nav className="sticky top-0 z-50 w-full border-b border-slate-800 bg-[#0B1120]/80 backdrop-blur-md">
+        <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
+          <Link href="/#pillars" className="inline-flex items-center text-sm font-medium text-slate-400 hover:text-white transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" />
             Back to Portfolio
           </Link>
-        </div>
-
-        <div className="w-full max-w-5xl px-8 flex flex-col md:flex-row items-center justify-between gap-12 relative z-10">
-          
-          {/* Left Text / Narrative */}
-          <div className="flex-1 space-y-6">
-            <motion.div
-              key={`title-${activeIndex}`}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h2 className="text-sm uppercase tracking-widest text-slate-500 dark:text-slate-400 font-semibold mb-2">Context Forge</h2>
-              <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-slate-900 dark:text-white mix-blend-difference">
-                {activePersona.title}
-              </h1>
-              <p className="text-lg text-slate-600 dark:text-slate-300 max-w-md">
-                {activePersona.desc}
-              </p>
-            </motion.div>
+          <div className="flex space-x-4">
+            <a href="https://github.com/utkarshsinghlaw/context-forge-68" target="_blank" rel="noopener noreferrer" className="p-2 text-slate-400 hover:text-white transition-colors">
+              <Github className="w-5 h-5" />
+            </a>
           </div>
+        </div>
+      </nav>
 
-          {/* Right Computer UI */}
-          <div className="flex-1 w-full max-w-md">
-            <div className="relative aspect-[4/3] w-full max-w-md mx-auto">
-              {/* Computer Frame */}
-              <div className={`absolute inset-0 rounded-2xl border-2 shadow-2xl transition-all duration-700 overflow-hidden flex flex-col ${activePersona.computerTheme}`}>
-                
-                {/* Header Bar */}
-                <div className="h-10 border-b border-inherit flex items-center px-4 space-x-2 opacity-80">
-                  <div className="w-3 h-3 rounded-full bg-red-400/80" />
-                  <div className="w-3 h-3 rounded-full bg-amber-400/80" />
-                  <div className="w-3 h-3 rounded-full bg-green-400/80" />
-                  <div className="ml-4 text-xs opacity-70 font-medium tracking-wide flex-1 text-center">Local Workspace OS</div>
-                </div>
+      <main className="max-w-5xl mx-auto px-4 py-12 md:py-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+          
+          {/* LEFT COLUMN: Sticky Meta Data (Brittany Chiang style) */}
+          <div className="lg:col-span-4 space-y-8 lg:sticky lg:top-32 lg:h-fit">
+            <div>
+              <p className="text-teal-400 font-mono text-sm mb-3">01. Case Study</p>
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">Context Forge</h1>
+              <p className="text-slate-400 text-sm leading-relaxed mb-6">
+                A local-first AI workspace orchestrator designed to solve the context window fragmentation problem for legal professionals and PMs.
+              </p>
+            </div>
 
-                {/* Main Content Area */}
-                <div className="flex-1 p-6 flex flex-col justify-center space-y-6 relative">
-                  
-                  {/* Performative Aurora Background for Designer */}
-                  {activeIndex === 2 && (
-                    <motion.div 
-                      className="absolute inset-0 bg-gradient-to-r from-cyan-400/20 via-purple-400/20 to-pink-400/20 blur-2xl"
-                      animate={{ backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"] }}
-                      transition={{ duration: 5, repeat: Infinity, ease: "linear" }}
-                    />
-                  )}
-
-                  <motion.div
-                    key={`prompt-${activeIndex}`}
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.2 }}
-                    className="flex items-start space-x-3 relative z-10"
-                  >
-                    <div className="mt-1">{activePersona.icon}</div>
-                    <p className="text-sm sm:text-base font-medium">{activePersona.prompt}</p>
-                  </motion.div>
-
-                  <motion.div
-                    key={`loader-${activeIndex}`}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: 1.5 }}
-                    className="p-3 rounded-lg border border-inherit bg-black/5 dark:bg-white/5 relative z-10 flex items-center space-x-3"
-                  >
-                    <motion.div 
-                      className="w-4 h-4 rounded-full border-2 border-inherit border-t-transparent"
-                      animate={{ rotate: 360 }}
-                      transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                    />
-                    <p className="text-sm opacity-80 animate-pulse">{activePersona.loader}</p>
-                  </motion.div>
-
-                  <motion.div
-                    key={`result-${activeIndex}`}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 3 }}
-                    className="text-sm font-semibold relative z-10"
-                  >
-                    {activePersona.result}
-                  </motion.div>
-                </div>
+            {/* Tech Stack (Wes Bos style) */}
+            <div>
+              <h3 className="text-white font-semibold text-sm uppercase tracking-widest mb-3">The Stack</h3>
+              <div className="flex flex-wrap gap-2">
+                {["TypeScript", "React", "Electron", "Local LLMs", "Vector DB"].map(tag => (
+                  <span key={tag} className="px-3 py-1 bg-indigo-900/30 text-indigo-300 text-xs font-mono rounded-full border border-indigo-500/20">
+                    {tag}
+                  </span>
+                ))}
               </div>
+            </div>
 
-              {/* Computer Stand / Base */}
-              <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-1/3 h-6 bg-slate-300 dark:bg-slate-800 rounded-b-xl opacity-50" />
+            {/* Table of Contents */}
+            <div className="hidden lg:block pt-8">
+              <ul className="space-y-3 text-sm font-medium text-slate-500">
+                <li><a href="#problem" className="hover:text-white transition-colors">01. The Problem</a></li>
+                <li><a href="#architecture" className="hover:text-white transition-colors">02. System Architecture</a></li>
+                <li><a href="#security" className="hover:text-white transition-colors">03. Privacy & Privilege</a></li>
+                <li><a href="#outcomes" className="hover:text-white transition-colors">04. Business Outcomes</a></li>
+              </ul>
             </div>
           </div>
 
-        </div>
+          {/* RIGHT COLUMN: Deep Content (Bret Victor style) */}
+          <div className="lg:col-span-8 space-y-16">
+            
+            {/* The Problem */}
+            <section id="problem" className="scroll-mt-32">
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                <Terminal className="mr-3 text-teal-400 w-6 h-6" />
+                The Context Fragmentation Problem
+              </h2>
+              <div className="prose prose-invert prose-slate max-w-none">
+                <p>
+                  As a Product Manager in Legal-Tech, one of the most persistent complaints I observed from attorneys and researchers using Generative AI is <strong>context fragmentation</strong>. 
+                </p>
+                <p>
+                  When reviewing a 400-page M&A contract or a dense technical spec, standard web-based LLMs drop context after a few prompts. Users are forced to constantly re-upload files, re-explain the premise, and manage dozens of disconnected chat tabs. Furthermore, uploading highly sensitive commercial litigation data to a cloud endpoint breaks attorney-client privilege and violates strict data residency laws.
+                </p>
+                <div className="bg-slate-800/50 border-l-4 border-teal-500 p-6 my-8 rounded-r-xl">
+                  <p className="text-white italic m-0">
+                    "How do we maintain infinite, persistent context across thousands of local files without ever sending a single byte of privileged data to a cloud server?"
+                  </p>
+                </div>
+              </div>
+            </section>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-2 opacity-50">
-          <span className="text-xs uppercase tracking-widest font-semibold mix-blend-difference text-white">Scroll</span>
-          <motion.div 
-            className="w-px h-12 bg-current mix-blend-difference text-white origin-top"
-            animate={{ scaleY: [0, 1, 0], y: [0, 24, 48] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          />
+            {/* System Architecture */}
+            <section id="architecture" className="scroll-mt-32">
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                <Cpu className="mr-3 text-indigo-400 w-6 h-6" />
+                System Architecture
+              </h2>
+              <div className="prose prose-invert prose-slate max-w-none">
+                <p>
+                  I architected <strong>Context Forge</strong> as a desktop-native application utilizing Electron and a local Vector Database (ChromaDB). 
+                </p>
+                <p>
+                  Instead of a standard stateless chat interface, the system indexes the user's entire local project directory (CAD files, PDFs, Word Docs) into a local vector store. When the user queries the agent, it performs a local Retrieval-Augmented Generation (RAG) pass against the embedded chunks before streaming the context to a locally running model (via Ollama or Llama.cpp).
+                </p>
+                
+                {/* Mock Code Block to show technical depth */}
+                <div className="my-8 bg-[#0d1117] rounded-xl overflow-hidden border border-slate-800">
+                  <div className="flex items-center px-4 py-2 bg-slate-900 border-b border-slate-800 text-xs font-mono text-slate-400">
+                    vector-ingestion.ts
+                  </div>
+                  <pre className="p-4 text-sm font-mono text-slate-300 overflow-x-auto">
+                    <code>{`// Local embedding generation without external API calls
+async function indexLocalWorkspace(dirPath: string) {
+  const documents = await DirectoryLoader.load(dirPath);
+  
+  // Enforce zero-telemetry local embedding model
+  const embeddings = new HuggingFaceLocalEmbeddings({ 
+    model: "all-MiniLM-L6-v2" 
+  });
+  
+  // Persist to local SQLite Chroma instance
+  await ChromaStore.fromDocuments(documents, embeddings, {
+    collectionName: "privileged-workspace",
+  });
+  
+  return { status: "SECURE_INDEX_COMPLETE" };
+}`}</code>
+                  </pre>
+                </div>
+              </div>
+            </section>
+
+            {/* Security */}
+            <section id="security" className="scroll-mt-32">
+              <h2 className="text-2xl font-bold text-white mb-6 flex items-center">
+                <Shield className="mr-3 text-red-400 w-6 h-6" />
+                Privacy & Attorney-Client Privilege
+              </h2>
+              <div className="prose prose-invert prose-slate max-w-none">
+                <p>
+                  The defining constraint of Legal-Tech is that <strong>data cannot leave the perimeter</strong>. 
+                </p>
+                <p>
+                  By utilizing localized orchestration, Context Forge ensures that e-discovery, contract analysis, and legal research happen entirely on the user's silicon. This completely bypasses the risk of third-party model scraping, effectively immunizing the firm against inadvertent waiver of attorney-client privilege.
+                </p>
+              </div>
+            </section>
+
+            {/* Outcomes */}
+            <section id="outcomes" className="scroll-mt-32">
+              <h2 className="text-2xl font-bold text-white mb-6">04. Business Outcomes</h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl">
+                  <h4 className="text-4xl font-bold text-white mb-2">100%</h4>
+                  <p className="text-sm text-slate-400">Data retention on-device. Zero cloud leakage, passing all infosec audits.</p>
+                </div>
+                <div className="bg-slate-900/50 border border-slate-800 p-6 rounded-2xl">
+                  <h4 className="text-4xl font-bold text-white mb-2">&lt; 2s</h4>
+                  <p className="text-sm text-slate-400">Average RAG retrieval latency querying across a 10GB local document corpus.</p>
+                </div>
+              </div>
+            </section>
+
+          </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 }

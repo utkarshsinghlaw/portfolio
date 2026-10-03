@@ -1,148 +1,105 @@
 "use client";
-import React, { useRef, useState, useEffect } from "react";
-import { motion, useScroll } from "framer-motion";
+import React from "react";
 import Link from "next/link";
-import { ArrowLeft, Mail } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
+import { BrutalistAccordion } from "@/components/ui/brutalist-accordion";
+import { FloatingDock } from "@/components/ui/floating-dock";
+import BlurFade from "@/components/ui/blur-fade";
 
 const essays = [
   {
-    id: "I",
-    title: "The ROI of Legal Tech",
-    subtitle: "Generative workflows in high-stakes insolvency",
-    content: "When analyzing commercial risk inside law firms, the bottleneck is rarely lack of precedent; it's the sheer velocity of data ingestion. By implementing localized RAG (Retrieval-Augmented Generation) architectures directly on top of unstructured contract repositories, we shifted the paradigm from manual discovery to instant synthesis. The result wasn't just a 40% reduction in billable hours lost to research, but a fundamental derisking of the firm's operational drag. AI is not a feature—it is a margin expander.",
-    bgColor: "bg-[#f8f9fa] dark:bg-[#0a0a0a]", // Almost white / almost black
-    textColor: "text-slate-900 dark:text-slate-100"
+    id: "item-1",
+    title: "The Agentic Shift in Power BI",
+    category: "Data Architecture",
+    content: (
+      <div className="space-y-6 text-lg md:text-xl text-[#333] leading-relaxed font-serif">
+        <p>
+          The traditional drag-and-drop dashboard is dead. We are entering an era of <strong>Agentic Business Intelligence</strong>, where LLMs no longer just generate DAX formulas for humans to paste, but actively manipulate the underlying <code className="bg-[#EAEAEA] px-1 font-mono text-sm border border-black/10">.pbip</code> semantic models directly.
+        </p>
+        <p>
+          This paradigm requires a complete structural change in how organizations deploy BI. Instead of deploying `.pbix` binaries, developers must save reports in the Power BI Project (PBIP) format, breaking a dashboard down into pure text (TMDL). This allows a dual-agent system—a Builder to write the logic, and an Auditor to verify layout visually—to construct enterprise-grade analytics autonomously.
+        </p>
+        <div className="p-6 border-2 border-black bg-white my-8 font-sans shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]">
+          <h4 className="font-bold text-black mb-2 uppercase tracking-wide text-sm">Key Takeaway</h4>
+          <p className="text-base text-black/80">
+            Agents cannot cross the finish line without perfect documentation. Organizations must supply explicit <strong>Ontologies</strong> and <strong>Scoping Rules</strong> to prevent catastrophic AI hallucination in financial reporting.
+          </p>
+        </div>
+      </div>
+    ),
   },
   {
-    id: "II",
-    title: "Macro-Ops in Data",
-    subtitle: "Why executive dashboards fail without Gestalt",
-    content: "A dashboard that requires a user manual is a failed dashboard. Most enterprise BI tools suffer from cognitive overload because they ignore the principles of Gestalt psychology. By aggressively applying the Law of Proximity and Miller's Law (keeping KPIs to a maximum of 7 elements), we rebuild trust with the C-suite. The UK Drinkable Water dashboard succeeded not because the ETL pipeline was complex, but because the final interface respected the executive's time.",
-    bgColor: "bg-[#f1f5f9] dark:bg-[#111827]", // Slate 100 / Gray 900
-    textColor: "text-slate-800 dark:text-slate-200"
+    id: "item-2",
+    title: "Zero-Budget Organic Acquisition",
+    category: "Product Strategy",
+    content: (
+      <div className="space-y-6 text-lg md:text-xl text-[#333] leading-relaxed font-serif">
+        <p>
+          In a high-interest rate environment, the venture-subsidized customer acquisition model (CAC &gt; LTV) has collapsed. SaaS companies must return to fundamental, zero-budget organic growth.
+        </p>
+        <p>
+          The most effective vector for this is <em>Engineering-as-Marketing</em>. Building free, high-utility micro-tools that solve a single, painful problem for a niche audience naturally attracts high-intent traffic. These tools act as programmatic lead magnets, compounding in SEO value while traditional paid channels decay.
+        </p>
+      </div>
+    ),
+  },
+  {
+    id: "item-3",
+    title: "Automating Cross-Jurisdictional Audits",
+    category: "Legal Tech",
+    content: (
+      <div className="space-y-6 text-lg md:text-xl text-[#333] leading-relaxed font-serif">
+        <p>
+          Global e-commerce requires navigating an increasingly fragmented regulatory landscape. Manual compliance audits are no longer scalable when launching products across the UK, EU, and US simultaneously.
+        </p>
+        <p>
+          By deploying autonomous LLM agents equipped with Retrieval-Augmented Generation (RAG) over specific legal corpora (e.g., ASA/CAP codes or GDPR directives), we can perform first-pass risk assessments in seconds. The agent highlights potential liabilities in marketing copy or data practices, allowing human attorneys to focus purely on high-stakes strategic risk rather than mechanical review.
+        </p>
+      </div>
+    ),
   }
 ];
 
+const dockItems = [
+  { title: "Home", icon: "H", href: "/" },
+  { title: "Agentic BI", icon: "I", href: "#item-1" },
+  { title: "Organic Growth", icon: "II", href: "#item-2" },
+  { title: "Legal Tech", icon: "III", href: "#item-3" },
+];
+
 export default function ThoughtLeadership() {
-  const [activeEssay, setActiveEssay] = useState(0);
-
-  // Simple scroll spy using Intersection Observer
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            const index = essays.findIndex(e => e.id === entry.target.id);
-            if (index !== -1) setActiveEssay(index);
-          }
-        });
-      },
-      { threshold: 0.5 }
-    );
-
-    essays.forEach((essay) => {
-      const el = document.getElementById(essay.id);
-      if (el) observer.observe(el);
-    });
-
-    return () => observer.disconnect();
-  }, []);
-
-  // Smooth scroll helper
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-  };
-
   return (
-    <div className={`min-h-screen font-serif transition-colors duration-1000 ease-in-out ${essays[activeEssay].bgColor} ${essays[activeEssay].textColor}`}>
-      
-      {/* Sticky Roman Numeral Header */}
-      <nav className="fixed top-0 w-full z-50 mix-blend-difference text-white p-6 md:p-12 flex justify-between items-center pointer-events-none">
-        <Link href="/#pillars" className="inline-flex items-center text-sm font-sans uppercase tracking-widest font-semibold hover:opacity-70 transition-opacity pointer-events-auto">
-          <ArrowLeft className="mr-4 h-4 w-4" />
-          Index
-        </Link>
-        <div className="flex space-x-12 pointer-events-auto font-sans">
-          {essays.map((essay, idx) => (
-            <button 
-              key={essay.id}
-              onClick={() => scrollTo(essay.id)}
-              className={`text-lg font-bold transition-all duration-500 ${activeEssay === idx ? 'opacity-100 scale-110' : 'opacity-40 hover:opacity-70'}`}
-            >
-              {essay.id}
-            </button>
-          ))}
-        </div>
-      </nav>
+    // Note: Forcefully applying Light Mode & Brutalist styling here to override the global shell
+    <div className="min-h-screen bg-[#F5F5F5] text-[#111111] font-sans selection:bg-black selection:text-white pb-32">
+      <FloatingDock items={dockItems} />
 
-      {/* Floating Contact CTA */}
-      <a href="mailto:contact@example.com" className="fixed bottom-12 right-12 z-50 bg-blue-600 hover:bg-blue-700 text-white rounded-full p-4 shadow-2xl transition-transform hover:scale-110 group">
-        <Mail className="h-6 w-6" />
-        <span className="absolute right-full mr-4 top-1/2 -translate-y-1/2 bg-slate-900 text-white text-sm font-sans px-3 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap">
-          Discuss Strategy
-        </span>
-      </a>
+      <main className="max-w-4xl mx-auto px-6 py-12 md:py-24 md:pl-32">
+        
+        <BlurFade delay={0.1}>
+          <Link href="/" className="inline-flex items-center text-sm font-bold text-[#111] hover:underline uppercase tracking-widest mb-16">
+            <ArrowLeft className="mr-2 h-4 w-4" />
+            Return
+          </Link>
+        </BlurFade>
 
-      {/* Progress Anchor Line */}
-      <div className="fixed left-6 md:left-12 top-0 h-full w-px bg-current opacity-10 z-40" />
-      <motion.div 
-        className="fixed left-6 md:left-12 top-0 w-px bg-current z-40 origin-top mix-blend-difference text-white"
-        initial={{ scaleY: 0 }}
-        animate={{ scaleY: (activeEssay + 1) / essays.length }}
-        transition={{ duration: 0.5 }}
-      />
+        <header className="mb-24">
+          <BlurFade delay={0.2}>
+            <h1 className="text-6xl md:text-8xl font-black tracking-tighter leading-none mb-6">
+              Essays & <br /> Observations.
+            </h1>
+          </BlurFade>
+          <BlurFade delay={0.3}>
+            <p className="text-xl md:text-2xl text-[#555] max-w-2xl font-serif">
+              A collection of thoughts on AI engineering, product-led growth, and the intersection of legal operations and automation.
+            </p>
+          </BlurFade>
+        </header>
 
-      {/* Essay Content Sections */}
-      <main className="relative z-10 w-full">
-        {essays.map((essay, idx) => (
-          <section 
-            key={essay.id} 
-            id={essay.id}
-            className="min-h-screen flex items-center justify-center p-8 md:p-24"
-          >
-            <div className="max-w-3xl w-full mx-auto relative">
-              {/* Massive Roman Numeral Background */}
-              <div className="absolute -top-32 -left-32 text-[20rem] font-bold opacity-5 pointer-events-none select-none font-sans">
-                {essay.id}
-              </div>
-              
-              <div className="relative z-10 space-y-8">
-                <motion.h1 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8 }}
-                  className="text-5xl md:text-7xl font-bold tracking-tight leading-tight"
-                >
-                  {essay.title}
-                </motion.h1>
-                <motion.h3 
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 0.8, delay: 0.2 }}
-                  className="text-xl md:text-2xl font-sans uppercase tracking-widest opacity-60"
-                >
-                  {essay.subtitle}
-                </motion.h3>
-                <motion.p 
-                  initial={{ opacity: 0 }}
-                  whileInView={{ opacity: 1 }}
-                  viewport={{ once: true, margin: "-100px" }}
-                  transition={{ duration: 1, delay: 0.4 }}
-                  className="text-lg md:text-xl leading-relaxed opacity-80 pt-8 border-t border-current border-opacity-20"
-                >
-                  {essay.content}
-                </motion.p>
-              </div>
-            </div>
-          </section>
-        ))}
+        <BlurFade delay={0.4}>
+          <BrutalistAccordion items={essays} />
+        </BlurFade>
+
       </main>
-
     </div>
   );
 }

@@ -13,7 +13,7 @@ export const FloatingDock = ({
 }) => {
   return (
     // Anchored to Top-Left, brutalist style
-    <div className={cn("fixed top-8 left-8 md:top-12 md:left-12 z-50", className)}>
+    <div className={cn("fixed top-24 left-8 md:top-32 md:left-12 z-[60]", className)}>
       <motion.div
         className="flex flex-col items-start gap-6 bg-transparent"
       >

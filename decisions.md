@@ -6,3 +6,9 @@
    - Satisficing: Primary action "Let's Talk" prominent on hero.
    - Proximity: Skills/Repos grouped visually.
    - Scanning vs. Reading: Using bold typography and code block performative UI for github showcases instead of dense paragraphs.
+
+### ASCII Avant-Garde Brutalism Refactor
+- **Date:** 2026-10-04
+- **Decision:** Replaced Apple-style neomorphic components (MacbookScroll, TracingBeam, Meteors) with pure ASCII/Terminal Brutalism (1px borders, monospace grids, stark contrasts) on the AI Engineering and Personal Software pages.
+- **Rationale:** To unify the dual-theme architecture. Terminal Brutalism (Dark Mode) and Architectural Brutalism (Light Mode/Taili Zhuang) share the same minimalist DNA, allowing a seamless theme toggle without breaking the visual language.
+- **Impact:** Massive reduction in DOM size and WebGL overhead. Removed 'Hire Me' text in favor of a professional 'Let's Talk' CTA.

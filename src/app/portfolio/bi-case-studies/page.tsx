@@ -8,7 +8,7 @@ import { NumberTicker } from "@/components/ui/number-ticker";
 
 export default function BICaseStudies() {
   return (
-    <div className="min-h-screen bg-[#0A0A0A] text-[#FAFAFA] font-sans selection:bg-indigo-500/30 pb-32">
+    <div className="min-h-screen font-sans selection:bg-indigo-500/30 pb-32">
       <main className="max-w-7xl mx-auto px-6 py-12 md:py-24">
         
         <BlurFade delay={0.1}>

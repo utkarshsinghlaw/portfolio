@@ -70,7 +70,7 @@ const dockItems = [
 export default function ThoughtLeadership() {
   return (
     // Note: Forcefully applying Light Mode & Brutalist styling here to override the global shell
-    <div className="min-h-screen bg-[#F5F5F5] text-[#111111] font-sans selection:bg-black selection:text-white pb-32">
+    <div className="min-h-screen font-sans selection:bg-black selection:text-white pb-32">
       <FloatingDock items={dockItems} />
 
       <main className="max-w-4xl mx-auto px-6 py-12 md:py-24 md:pl-32">

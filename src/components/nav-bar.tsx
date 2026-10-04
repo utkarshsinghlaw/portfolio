@@ -3,7 +3,7 @@
 import * as React from "react";
 import Link from "next/link";
 import { ThemeToggle } from "./theme-toggle";
-import ShimmerButton from "@/components/ui/shimmer-button";
+import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { ArrowRight } from "lucide-react";
 
 export function NavBar() {
@@ -21,14 +21,14 @@ export function NavBar() {
             Portfolio
           </Link>
           <ThemeToggle />
-          <a href="/#contact">
+          <Link href="/#contact">
             <ShimmerButton className="px-4 py-2 h-9 text-xs sm:text-sm font-bold shadow-lg">
               <span className="whitespace-pre-wrap text-center text-xs sm:text-sm font-bold leading-none tracking-tight text-white dark:from-white dark:to-slate-900/10 flex items-center">
-                Let's Talk
+                Let&apos;s Talk
                 <ArrowRight className="w-3 h-3 ml-2" />
               </span>
             </ShimmerButton>
-          </a>
+          </Link>
         </div>
       </div>
     </nav>

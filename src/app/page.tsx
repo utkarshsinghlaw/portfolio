@@ -47,7 +47,7 @@ const secondaryPillars = [
 export default function Home() {
   return (
     // Applying "dark" class directly to force the Premium Dark Mode shell
-    <div className="min-h-screen bg-[#0A0A0A] text-[#FAFAFA] font-[family-name:var(--font-geist-sans)] dark selection:bg-indigo-500/30 overflow-hidden relative">
+    <div className="min-h-screen font-[family-name:var(--font-geist-sans)] selection:bg-indigo-500/30 overflow-hidden relative z-10">
       <RetroGrid />
       <main className="max-w-6xl mx-auto px-6 py-12 md:py-24 relative z-10">
         
